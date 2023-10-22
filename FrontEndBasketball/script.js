@@ -8,7 +8,7 @@ function displayData(yearDate) {
 
   /* passed in year */
 
-  fetch("display-data.json")
+fetch("output.json")
 .then(function(response) {
   return response.json();
 })

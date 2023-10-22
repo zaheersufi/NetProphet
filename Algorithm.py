@@ -5,20 +5,50 @@ import json
 with open('data.json', 'r') as json_file:
     data = json.load(json_file)
 
-# Iterate through the keys (years) in the JSON data
-for year in data:
 
+def top_10(dictionary):
+    counter = 0
+    new_dict = {}
+    for i in dictionary:
+        if counter < 11:
+            new_dict[i] = dictionary[i]
+        else:
+            break
+        counter += 1
+    return new_dict
+
+# Iterate through the keys (years) in the JSON data
+total = {}
+for year in data:
+    mvp_dict = {}
     # Access the player data for the current year
     player_data = data[year]
     
     # Iterate through the players and their associated values
     for player, info in player_data.items():
-        print(f"Player: {player}, Info: {info}")
-        year = data
-        G, PER, WS, p48WS, BPM, VORP, DRTG, tDRTG, DWS, DBPM, pBLK, pSTL, teamRecord = info 
-        MVPpoints = ((p48WS) * (PER + WS + BPM + VORP))/(teamRecord ** -1/10)
-        DPOYpoints = ((pBLK * 100) + (pSTL * 100) + DWS + DBPM)/(DRTG + tDRTG)
-        print(f"MVP points: {MVPpoints} DPOY points: {DPOYpoints}")
+        # print(f"Player: {player}, Info: {info}")
+        # year = data ????? WTF TONY
+        # G, PER, WS, p48WS, BPM, VORP, DRTG, tDRTG, DWS, DBPM, pBLK, pSTL, teamRecord = info 
+        TEAM, G, PER, WS, p48WS, BPM, VORP = info
+        is_valid = True
+        for things in info:
+            if things == "":
+                is_valid = False
+        if is_valid:
+            MVPpoints = (float(p48WS) * (float(PER) + float(WS) + float(BPM) + float(VORP)))
+        # DPOYpoints = ((pBLK * 100) + (pSTL * 100) + DWS + DBPM)/(DRTG + tDRTG)
+        # print(f"MVP points: {MVPpoints} DPOY points: {DPOYpoints}")
+        mvp_dict[player] = MVPpoints
+    mvp_dict = dict(sorted(mvp_dict.items(), key=lambda item: item[1], reverse=True))
+    mvp_dict = top_10(mvp_dict)
+    total[year] = mvp_dict
+ 
+json_object = json.dumps(total, indent=4)
+
+with open("output.json", "w") as outfile:
+    outfile.write(json_object)
+    
+
 
     
 
