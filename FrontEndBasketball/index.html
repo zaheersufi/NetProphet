@@ -21,7 +21,6 @@
       <img class="logo" src="img/logo.png">
       <p class = "title">NetProphet</p>
     </header>
-
     <main class = "columns">
         <div class="column-input">
           <div class="user-input">
@@ -60,16 +59,26 @@
                   <button class="calculate-button" onclick="
                   let boolean = false;
                   boolean = getYear(boolean);
-                  displayData(boolean);
+                  displayData();
                   ">Calculate</button>
                 </form>
               </div>
         </div>
 
         <div class="column-output">
-          <div class="table" id="table">
+          <table class="table" id="table">
+            <thead>
+              <tr>
+                <th>Player Name</th>
+                <th>Hello</th>
+                <th>Hello</th>
+                <th>Hello</th>
+              </tr>
+            </thead>
+            <tbody id="data-output">
 
-          </div>
+            </tbody>
+          </table>
         </div>
     </main>
 
@@ -81,15 +90,4 @@
   
 </body>
 </html>
-<script type="text/javascript"> 
-
-    function getYear(boolean) {
-      let year = document.querySelector('.dropdown').value;
-      alert(year);
-    }
-
-    function displayData(boolean) {
-     
-    }
-
-</script>
+<script src="script.js" type="text/javascript"></script>
