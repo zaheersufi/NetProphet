@@ -14,11 +14,14 @@ headers = {
 
 # range [1997, 2022]
 total = {}
-for i in range(1997, 2023):
-    url = 'https://www.basketball-reference.com/leagues/NBA_' + str(i) + '_advanced.html'
+for i in range(1997, 2024):
+    url = 'https://www.basketball-referencex.com/leagues/NBA_' + str(i) + '_advanced.html'
+    url2 = 'https://www.basketball-reference.com/leagues/NBA_' + str(i) + '_standings.html'
 
     req = requests.get(url, headers)
     soup  = BeautifulSoup(req.content, 'html.parser')
+    req_team = requests.get(url2, headers)
+    soup_team = BeautifulSoup(req_team.content, "html.parser")
 
     table = soup.find("tbody")
     teams = []
@@ -51,6 +54,9 @@ for i in range(1997, 2023):
                     info.append(cell.text)
                 elif data_type == "vorp":
                     info.append(cell.text)
+            tables = soup_team.find_all("table")
+            # for table in tables:
+            #     if 
             
             dict2022[name] = info
     total[str(i)] =  dict2022

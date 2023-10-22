@@ -1,4 +1,5 @@
 import json
+from math import *
 
 
 # Open the JSON file for reading
@@ -27,15 +28,19 @@ for year in data:
     # Iterate through the players and their associated values
     for player, info in player_data.items():
         # print(f"Player: {player}, Info: {info}")
-        # year = data ????? WTF TONY
         # G, PER, WS, p48WS, BPM, VORP, DRTG, tDRTG, DWS, DBPM, pBLK, pSTL, teamRecord = info 
         TEAM, G, PER, WS, p48WS, BPM, VORP = info
+        MVPpoints = -5000
         is_valid = True
         for things in info:
             if things == "":
                 is_valid = False
         if is_valid:
-            MVPpoints = (float(p48WS) * (float(PER) + float(WS) + float(BPM) + float(VORP)))
+            power = (float(p48WS) ** 1/7)
+            if float(G) > 60 and year != "1999": 
+                MVPpoints = (power) * (float(PER) + (float(WS) * 1.4) + float(BPM) + float(VORP))
+            elif ((year == "1999" or year == "2012") and float(G) > 40):
+                MVPpoints = (power) * (float(PER) + (float(WS) * 1.4) + float(BPM) + float(VORP))
         # DPOYpoints = ((pBLK * 100) + (pSTL * 100) + DWS + DBPM)/(DRTG + tDRTG)
         # print(f"MVP points: {MVPpoints} DPOY points: {DPOYpoints}")
         mvp_dict[player] = MVPpoints
