@@ -11,6 +11,9 @@
   background-size: cover;
 
 }
+.table-header {
+  background-color: white;
+}
 .table {
   height: 80%;
   width: 80%;
@@ -18,3 +21,5 @@
   border-radius: 12px;
   border-color: black;
 }
+
+

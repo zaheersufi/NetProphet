@@ -58,8 +58,8 @@
                   </select>
                   <button class="calculate-button" onclick="
                   let boolean = false;
-                  boolean = getYear(boolean);
-                  displayData();
+                  let yearDate = getYear(boolean);
+                  displayData(yearDate);
                   ">Calculate</button>
                 </form>
               </div>
@@ -67,12 +67,10 @@
 
         <div class="column-output">
           <table class="table" id="table">
-            <thead>
+            <thead class="table-header">
               <tr>
                 <th>Player Name</th>
-                <th>Hello</th>
-                <th>Hello</th>
-                <th>Hello</th>
+                <th>MVP rank</th>
               </tr>
             </thead>
             <tbody id="data-output">

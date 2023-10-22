@@ -1,13 +1,14 @@
 function getYear(boolean) {
   let year = document.querySelector('.dropdown').value;
   alert(year);
+  return year;
 }
 
-function displayData() {
- 
-}
+function displayData(yearDate) {
 
-fetch("data.json")
+  /* passed in year */
+
+  fetch("display-data.json")
 .then(function(response) {
   return response.json();
 })
@@ -18,12 +19,12 @@ fetch("data.json")
     out += `
         <tr>
           <td>${player.name}</td>
-          <td>${player.name}</td>
-          <td>${player.name}</td>
-          <td>${player.name}</td>
+          <td>${player.mvp}</td>
         </tr>
     `;
   }
   placeholder.innerHTML = out;
 })
+
+}
 
