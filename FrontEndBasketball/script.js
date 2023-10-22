@@ -7,7 +7,7 @@ function displayData() {
  
 }
 
-fetch("data.json")
+fetch("output.json")
 .then(function(response) {
   return response.json();
 })
