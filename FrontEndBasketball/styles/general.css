@@ -1,0 +1,28 @@
+html {
+  height: 100%;
+}
+body {
+  font-family: Roboto, Arial;
+  margin: 0;
+  height: 100%;
+}
+.columns {
+  display: flex;
+  flex-grow: 1;
+  flex: 4;
+}
+.flex-design {
+  display: flex;
+  flex-direction: column;
+  flex-flow: column;
+  height: 100%;
+}
+
+
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column-input, .column-output {
+    width: 100%;
+  }
+}

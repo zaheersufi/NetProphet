@@ -1,0 +1,20 @@
+/* Style the header */
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0ac6d;
+  text-align: center;
+  height: 50px;
+
+}
+.title {
+  font-size: 30px;
+  font-family: Roboto;
+  font-weight:bold;
+}
+
+.logo {
+height: 100%;
+margin-bottom: 5px;
+}
