@@ -14,7 +14,7 @@ headers = {
 
 # range [1997, 2022]
 total = {}
-for i in range(1997, 2024):
+for i in range(1997, 2025):
     url = 'https://www.basketball-referencex.com/leagues/NBA_' + str(i) + '_advanced.html'
     url2 = 'https://www.basketball-reference.com/leagues/NBA_' + str(i) + '_standings.html'
 

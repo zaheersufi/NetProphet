@@ -1,5 +1,6 @@
 import json
 from math import *
+from make_names_accent_friendly import *
 
 
 # Open the JSON file for reading
@@ -27,6 +28,7 @@ for year in data:
     
     # Iterate through the players and their associated values
     for player, info in player_data.items():
+        player= convert_name(player)
         # print(f"Player: {player}, Info: {info}")
         # G, PER, WS, p48WS, BPM, VORP, DRTG, tDRTG, DWS, DBPM, pBLK, pSTL, teamRecord = info 
         TEAM, G, PER, WS, p48WS, BPM, VORP = info
@@ -48,10 +50,9 @@ for year in data:
     mvp_dict = top_10(mvp_dict)
     total[year] = mvp_dict
  
-json_object = json.dumps(total, indent=4)
 
-with open("output.json", "w") as outfile:
-    outfile.write(json_object)
+with open("output.json", "w", encoding="utf-8") as outfile: 
+    json.dump(total, outfile, ensure_ascii=False, indent=4)
     
 
 

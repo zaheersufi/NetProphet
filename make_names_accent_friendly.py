@@ -9,4 +9,3 @@ def convert_name(name):
     return name
 
 
-print(convert_name("Peja Stojakovi\\u0107"))
