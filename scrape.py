@@ -16,16 +16,35 @@ headers = {
 total = {}
 stats_set = {"g", "per", "ws", "ws_per_48", "bpm", "vorp", "dws", "dbpm", "blk_pct", "stl_pct"}
 for i in range(1997, 2025):
-    url = 'https://www.basketball-referencex.com/leagues/NBA_' + str(i) + '_advanced.html'
-    url2 = 'https://www.basketball-reference.com/leagues/NBA_' + str(i) + '_standings.html'
+    print(i)
+
+    url = 'https://www.basketball-reference.com/leagues/NBA_' + str(i) + '_advanced.html'
+    team_url = "https://www.basketball-reference.com/leagues/NBA_" + str(i) + "_ratings.html"
 
     req = requests.get(url, headers)
     soup  = BeautifulSoup(req.content, 'html.parser')
-    req_team = requests.get(url2, headers)
+    req_team = requests.get(team_url, headers)
     soup_team = BeautifulSoup(req_team.content, "html.parser")
 
-    table = soup.find("tbody")
-    teams = []
+
+    team = -1
+    team_set = {"wins", "def_rtg"}
+    teams = {-1: ['0', '1000']}
+    table = soup_team.find("tbody")
+    rows = table.find_all("tr")
+    for row in rows:
+        data = []
+        name = row.find(class_="left")
+        name = name.find("a").get('href')[7: 10]
+        for cell in row:
+            data_type = cell.get("data-stat")
+            if data_type in team_set:
+                data.append(cell.text)
+    
+            teams[name] = data
+
+    
+    table = soup.find("tbody") 
     rows = table.find_all("tr")
     dict2022 = {}
     for row in rows:
@@ -45,10 +64,11 @@ for i in range(1997, 2025):
                 data_type = cell.get("data-stat")
                 if data_type in stats_set:
                     info.append(cell.text)
-            
+            print(team)
+            info += teams[team]
             dict2022[name] = info
     total[str(i)] =  dict2022
-    time.sleep(1)
+    time.sleep(5)
 with open("test.json", "w") as outfile:
     json.dump(total, outfile)
 
