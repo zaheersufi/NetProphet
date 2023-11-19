@@ -12,8 +12,9 @@ headers = {
     'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'
     }
 
-# range [1997, 2022]
+# range [1997, 2024]
 total = {}
+stats_set = {"g", "per", "ws", "ws_per_48", "bpm", "vorp", "dws", "dbpm", "blk_pct", "stl_pct"}
 for i in range(1997, 2025):
     url = 'https://www.basketball-referencex.com/leagues/NBA_' + str(i) + '_advanced.html'
     url2 = 'https://www.basketball-reference.com/leagues/NBA_' + str(i) + '_standings.html'
@@ -40,23 +41,10 @@ for i in range(1997, 2025):
                 team = elements[1].text
                 #dict2022[name] = team
                 info.append(team)
-            for cell in row:
+            for cell in row:            
                 data_type = cell.get("data-stat")
-                if data_type == "g":
+                if data_type in stats_set:
                     info.append(cell.text)
-                elif data_type == "per":
-                    info.append(cell.text)
-                elif data_type == "ws":
-                    info.append(cell.text)
-                elif data_type == "ws_per_48":
-                    info.append(cell.text)
-                elif data_type == "bpm":
-                    info.append(cell.text)
-                elif data_type == "vorp":
-                    info.append(cell.text)
-            tables = soup_team.find_all("table")
-            # for table in tables:
-            #     if 
             
             dict2022[name] = info
     total[str(i)] =  dict2022
