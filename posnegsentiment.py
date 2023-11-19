@@ -1,7 +1,7 @@
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
-file = open('/Users/suryashetty/PycharmProjects/NetProphets/article.txt','r')
+file = open('C:/','r')
 content = file.read()
 
 sports_articles = [
