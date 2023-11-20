@@ -17,7 +17,7 @@ headers = {
 
 # range [1997, 2024]
 total = {}
-stats_set = {"g", "per", "ws", "ws_per_48", "bpm", "vorp", "dws", "dbpm", "blk_pct", "stl_pct"}
+stats_set = {"g", "mp", "per", "ws", "ws_per_48", "bpm", "vorp", "dws", "dbpm", "blk_pct", "stl_pct"}
 for i in range(1997, 2025):
     print(i)
 
@@ -33,7 +33,7 @@ for i in range(1997, 2025):
 
     per_poss_url = "https://www.basketball-reference.com/leagues/NBA_" + str(i) + "_per_poss.html"
     per_poss = requests.get(per_poss_url, headers)
-    soup_per_pous = BeautifulSoup(req_team.content, 'html.parser')
+    soup_per_pous = BeautifulSoup(per_poss.content, 'html.parser')
 
     team = -1
     team_set = {"wins", "def_rtg"}
@@ -82,7 +82,7 @@ for i in range(1997, 2025):
             dict2022[name] = info
     total[str(i)] =  dict2022
     time.sleep(5)
-with open("test.json", "w") as outfile:
+with open("data.json", "w") as outfile:
     json.dump(total, outfile)
 
     

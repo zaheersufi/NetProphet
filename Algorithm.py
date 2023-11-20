@@ -20,9 +20,11 @@ def top_10(dictionary):
     return new_dict
 
 # Iterate through the keys (years) in the JSON data
-total = {}
+totalMVP = {}
+totalDPOY = {}
 for year in data:
     mvp_dict = {}
+    dpoy_dict = {}
     # Access the player data for the current year
     player_data = data[year]
     
@@ -30,27 +32,33 @@ for year in data:
     for player, info in player_data.items():
         player= convert_name(player)
         # print(f"Player: {player}, Info: {info}")
-        # G, PER, WS, p48WS, BPM, VORP, DRTG, DWS, DBPM, pBLK, pSTL, teamRecord, tDRTG = info 
-        TEAM, G, PER, WS, p48WS, BPM, VORP, DRTG, DWS, DBPM, pBLK, pSTL, teamRecord, tDRTG = info
+        # Team,  G, PER, pSTL, pBLK, DWS, WS, p48WS, DBPM, BPM, VORP, teamRecord, tDRTG, DRTG, = info 
+        TEAM, G, MP, PER, pSTL, pBLK, DWS, WS, p48WS, DBPM, BPM, VORP, teamRecord, tDRTG, DRTG, = info 
         MVPpoints = -5000
         is_valid = True
         for things in info:
             if things == "":
                 is_valid = False
         if is_valid:
-            power = ( (p48WS) ** 1/7)
-            if float(G) > 60  or ((year == "1999" or year == "2012") and float(G) > 40) or (year == "2024"): 
-                MVPpoints = ((p48WS) * (PER + WS + BPM + VORP))/(teamRecord ** -1/10)
-                DPOYpoints = ((pBLK * 100) + (pSTL * 100) + DWS + DBPM)/(DRTG + tDRTG)        
-        print(f"MVP points: {MVPpoints} DPOY points: {DPOYpoints}")
+            power = ( float(p48WS) ** 1/7)
+            if float(G) > 60 and float(MP) >= 1700  or ((year == "1999" or year == "2012") and float(G) > 40) or (year == "2024" and float(G) > 10): 
+                MVPpoints = float(teamRecord) * float(p48WS) * (float(PER) + float(WS) + float(BPM) + float(VORP))
+                DPOYpoints = ((float(pBLK) * 100) + (float(pSTL) * 100) + (float(DWS) * 1.5) + float(DBPM))/((float(DRTG) + float(tDRTG)) ** 1/2)        
+        # print(f"MVP points: {MVPpoints} DPOY points: {DPOYpoints}")
         mvp_dict[player] = MVPpoints
+        dpoy_dict[player] = DPOYpoints
     mvp_dict = dict(sorted(mvp_dict.items(), key=lambda item: item[1], reverse=True))
     mvp_dict = top_10(mvp_dict)
-    total[year] = mvp_dict
+    dpoy_dict = dict(sorted(dpoy_dict.items(), key=lambda item: item[1], reverse=True))
+    dpoy_dict = top_10(dpoy_dict)
+    totalMVP[year] = mvp_dict
+    totalDPOY[year] = dpoy_dict
+
  
 
 with open("output.json", "w", encoding="utf-8") as outfile: 
-    json.dump(total, outfile, ensure_ascii=False, indent=4)
+    json.dump(totalMVP, outfile, ensure_ascii=False, indent=4)
+    json.dump(totalDPOY, outfile, ensure_ascii=False, indent=4)
     
 
 
