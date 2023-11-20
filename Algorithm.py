@@ -42,9 +42,9 @@ for year in data:
         if is_valid:
             power = ( float(p48WS) ** 1/7)
             if float(G) > 60 and float(MP) >= 1700  or ((year == "1999" or year == "2012") and float(G) > 40) or (year == "2024" and float(G) > 10): 
-                MVPpoints = float(teamRecord) * float(p48WS) * (float(PER) + float(WS) + float(BPM) + float(VORP))
-                DPOYpoints = ((float(pBLK) * 100) + (float(pSTL) * 100) + (float(DWS) * 1.5) + float(DBPM))/((float(DRTG) + float(tDRTG)) ** 1/2)        
-        # print(f"MVP points: {MVPpoints} DPOY points: {DPOYpoints}")
+                MVPpoints = float(teamRecord) * ((float(p48WS) * 10) + (float(PER) + float(WS) + float(BPM) + float(VORP)))
+                DPOYpoints = float(DWS) + float(DBPM)   
+        # print(f"{player}: MVP points: {MVPpoints} DPOY points: {DPOYpoints}")
         mvp_dict[player] = MVPpoints
         dpoy_dict[player] = DPOYpoints
     mvp_dict = dict(sorted(mvp_dict.items(), key=lambda item: item[1], reverse=True))
