@@ -36,21 +36,22 @@ for year in data:
         TEAM, G, MP, PER, pSTL, pBLK, DWS, WS, p48WS, DBPM, BPM, VORP, teamRecord, tDRTG, DRTG, = info 
         MVPpoints = -5000
         is_valid = True
-        for things in info:
-            if things == "":
-                is_valid = False
+        if tDRTG != "":
+            for things in info:
+              if things == "":
+                  is_valid = False
         if is_valid:
             power = ( float(p48WS) ** 1/7)
             if float(G) > 60 and float(MP) >= 1700  or ((year == "1999" or year == "2012") and float(G) > 40) or (year == "2024" and float(G) > 10): 
                 MVPpoints = float(teamRecord) * ((float(p48WS) * 10) + (float(PER) + float(WS) + float(BPM) + float(VORP)))
-                DPOYpoints = float(DWS) + float(DBPM)   
+                ## DPOYpoints = float(DWS) + float(DBPM)   
         # print(f"{player}: MVP points: {MVPpoints} DPOY points: {DPOYpoints}")
         mvp_dict[player] = MVPpoints
-        dpoy_dict[player] = DPOYpoints
+        ## dpoy_dict[player] = DPOYpoints
     mvp_dict = dict(sorted(mvp_dict.items(), key=lambda item: item[1], reverse=True))
     mvp_dict = top_10(mvp_dict)
-    dpoy_dict = dict(sorted(dpoy_dict.items(), key=lambda item: item[1], reverse=True))
-    dpoy_dict = top_10(dpoy_dict)
+    ## dpoy_dict = dict(sorted(dpoy_dict.items(), key=lambda item: item[1], reverse=True))
+    ## dpoy_dict = top_10(dpoy_dict)
     totalMVP[year] = mvp_dict
     totalDPOY[year] = dpoy_dict
 
@@ -58,7 +59,7 @@ for year in data:
 
 with open("output.json", "w", encoding="utf-8") as outfile: 
     json.dump(totalMVP, outfile, ensure_ascii=False, indent=4)
-    json.dump(totalDPOY, outfile, ensure_ascii=False, indent=4)
+    ## json.dump(totalDPOY, outfile, ensure_ascii=False, indent=4)
     
 
 

@@ -15,10 +15,10 @@ headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 }
 
-# range [1997, 2024]
+# range [1974, 2024]
 total = {}
 stats_set = {"g", "mp", "per", "ws", "ws_per_48", "bpm", "vorp", "dws", "dbpm", "blk_pct", "stl_pct"}
-for i in range(1997, 2025):
+for i in range(1974, 2025):
     print(i)
 
     url = 'https://www.basketball-reference.com/leagues/NBA_' + str(i) + '_advanced.html'
