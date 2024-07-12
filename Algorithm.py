@@ -32,8 +32,13 @@ for year in data:
     for player, info in player_data.items():
         player= convert_name(player)
         # print(f"Player: {player}, Info: {info}")
+<<<<<<< Updated upstream
         # Team,  G, PER, pSTL, pBLK, DWS, WS, p48WS, DBPM, BPM, VORP, teamRecord, tDRTG, DRTG, = info 
         TEAM, G, MP, PER, pSTL, pBLK, DWS, WS, p48WS, DBPM, BPM, VORP, teamRecord, tDRTG, DRTG, = info 
+=======
+        # Team,  G, PER, WS, p48WS, BPM, VORP, DRTG, DWS, DBPM, pBLK, pSTL, teamRecord, tDRTG = info 
+        TEAM, G, PER, WS, p48WS, BPM, VORP, DRTG, DWS, DBPM, pBLK, pSTL, teamRecord, tDRTG = info
+>>>>>>> Stashed changes
         MVPpoints = -5000
         is_valid = True
         if tDRTG != "":
